@@ -1,14 +1,6 @@
 {
-    "incorrectCredentials" : {
-        "message" : "Epic sadface: Username and password do not match any user in this service"
-    },
-    "lockedUser" : {
-        "message" : "Epic sadface: Sorry, this user has been locked out."
-    },
-    "usernameRequired" : {
-        "message" : "Epic sadface: Username is required"
-    },
-    "passwordRequired" : {
-        "message" : "Epic sadface: Password is required"
-    }
+    "incorrectCredentials" : {"message" : "Epic sadface: Username and password do not match any user in this service"},
+    "lockedUser" : {"message" : "Epic sadface: Sorry, this user has been locked out."},
+    "usernameRequired" : {"message" : "Epic sadface: Username is required"},
+    "passwordRequired" : {"message" : "Epic sadface: Password is required"}
 }
