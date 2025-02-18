@@ -12,28 +12,33 @@ test.describe('Test Cases inventory saucedemo.com', () => {
         await inventory.expectInventoryPage()
     })
 
-    test('Test Case 1 : Should List by Name (Z to A)', async ({inventory}) => {
-        //Arrange
-        const sortOptions = {AZ : "az"}
-        //Act & Assert
-        await inventory.sortBy(sortOptions.AZ)
-    })
+    test('Test Case 1 : Should List by Name (A to Z)', async ({ inventory }) => {
+        const sortOptions = { AZ: "az" };
+        await inventory.sortByName(sortOptions.AZ);
+    });
     test('Test Case 2 : Should List by Name (A to Z)', async ({inventory}) => {
-        //Arrange
         const sortOptions = {ZA : "za"}
-        //Act & Assert
-        await inventory.sortBy(sortOptions.ZA)
+        await inventory.sortByName(sortOptions.ZA)
     })
     test('Test Case 3 : List by Price (Low to High)', async ({inventory}) => {
-        //Arrange
         const sortOptions = {LOHI : "lohi"}
-        //Act & Assert
-        await inventory.sortBy(sortOptions.LOHI)
+        await inventory.sortByPrice(sortOptions.LOHI)
     })
     test('Test Case 4 : List by Price (High to Low)', async ({inventory}) => {
-        //Arrange
         const sortOptions = {HILO : "hilo"}
-        //Act & Assert
-        await inventory.sortBy(sortOptions.HILO)
+        await inventory.sortByPrice(sortOptions.HILO)
+    })
+
+    test('Test Case 5 : Add to Cart and Then Remove from Cart', async ({inventory}) => {
+        //Arrange
+        const product = {
+            id : 4,
+            name: "Sauce Labs Onesie",
+        }
+        //Act
+        await inventory.addOneProductToCart(product.id)
+        await expect(inventory.cartCounter).toBeVisible()
+        await inventory.deleteOneProduct()
+        await expect(inventory.cartCounter).not.toBeVisible()
     })
 })
