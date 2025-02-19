@@ -5,13 +5,12 @@ test.describe('Test Cases inventory Item saucedemo.com', async () => {
     test.beforeEach(async ({home, inventory}) => {
         // Arrange
         const standardUser = { username: process.env.USERNAME_STANDARD, password: process.env.PASSWORD };
-        const product = { id: 2, name: 'Sauce Labs Bolt T-Shirt' };
         // Act
         await home.goto();
         await home.expectHomePage();
         await home.fillLoginForm(standardUser);
         await inventory.expectInventoryPage();
-        await inventory.clickOnItemName(2);
+        await inventory.clickOnItemName(4);
     });
 
     test('Test Case 1 : Add to Cart and Update Cart Counter', async ({inventoryitem}) => {
