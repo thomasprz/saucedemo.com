@@ -1,7 +1,6 @@
 import { test, expect } from "../fixtures/base.fixture";
 import {fakeLoginData} from '../factories/login.factory'
-import data from "../assets/data/e2e/login.data.json"
-
+import { loginData } from "../assets/data/e2e/login.data";
 
 test.describe('Test Cases login saucedemo.com', () => {
 
@@ -77,7 +76,7 @@ test.describe('Test Cases login saucedemo.com', () => {
         await home.fillLoginForm(wrongCredentialsUser)
         //Expect
         await expect(home.errorLoginMessage).toBeVisible()
-        await expect(home.errorLoginMessage).toContainText(data.incorrectCredentials.message)
+        await expect(home.errorLoginMessage).toContainText(loginData.incorrectCredentials)
     })
 
     test('Test case 7 : login with Locked User ', async ({home}) => {
@@ -90,7 +89,7 @@ test.describe('Test Cases login saucedemo.com', () => {
         await home.fillLoginForm(lockedUser)
         //Assert
         await expect(home.errorLoginMessage).toBeVisible
-        await expect(home.errorLoginMessage).toContainText(data.lockedUser.message)
+        await expect(home.errorLoginMessage).toContainText(loginData.locked_user)
     })
 
     test('Test case 8 : Login with Empty User ', async ({home}) => {
@@ -103,7 +102,7 @@ test.describe('Test Cases login saucedemo.com', () => {
         await home.fillLoginForm(emptyUsernamedUser)
         //Assert
         await expect(home.errorLoginMessage).toBeVisible
-        await expect(home.errorLoginMessage).toContainText(data.usernameRequired.message)
+        await expect(home.errorLoginMessage).toContainText(loginData.requiredUsername)
     })
 
     test('Test case 9 : Login with Empty Password ', async ({home}) => {
@@ -116,7 +115,7 @@ test.describe('Test Cases login saucedemo.com', () => {
         await home.fillLoginForm(emptyPasswordUser)
         //Assert
         await expect(home.errorLoginMessage).toBeVisible
-        await expect(home.errorLoginMessage).toContainText(data.passwordRequired.message)
+        await expect(home.errorLoginMessage).toContainText(loginData.requiredPassword)
     })
 
     test('Test case 10 : Login with Empty Credential ', async ({home}) => {
@@ -129,7 +128,7 @@ test.describe('Test Cases login saucedemo.com', () => {
         await home.fillLoginForm(emptyUserData)
         //Assert
         await expect(home.errorLoginMessage).toBeVisible
-        await expect(home.errorLoginMessage).toContainText(data.usernameRequired.message)
+        await expect(home.errorLoginMessage).toContainText(loginData.requiredUsername)
     })
 
 })
