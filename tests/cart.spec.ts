@@ -25,4 +25,8 @@ test.describe('Test Cases inventory Item saucedemo.com', async () => {
         await expect(cart.cartCounter).not.toBeVisible()
     })
 
+    test('Test Case 2 : Continue shopping', async ({cart, inventory}) => {
+        await cart.clickContinueShopping()
+        await inventory.expectInventoryPage()
+    })
 })
