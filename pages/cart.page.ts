@@ -1,5 +1,7 @@
 import {Page, Locator, expect} from '@playwright/test'
 import { BasePage } from './base.page';
+import { InventoryPage } from './inventory.page';
+import { CheckoutStepOnePage } from './checkout-step-one.page';
 
 export class CartPage extends BasePage {
     readonly headerCartPage : Locator
@@ -47,6 +49,16 @@ export class CartPage extends BasePage {
     async verifyCartCountDecreasedByOne() {
         const newCount = await this.getCurrentCartCount();
         expect(newCount).toBe(newCount - 1);
+    }
+
+    async clickContinueShopping(){
+        await this.buttonContinueShopping.click()
+        return new InventoryPage(this.page)
+    }
+
+    async clickCheckout(){
+        await this.buttonCheckout.click()
+        return new CheckoutStepOnePage(this.page)
     }
 
 }
