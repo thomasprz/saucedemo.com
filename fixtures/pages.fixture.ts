@@ -4,6 +4,7 @@ import {test as pagesTest} from '@playwright/test'
 import { InventoryPage } from "../pages/inventory.page";
 import { InventoryItemPage } from "../pages/inventory-item.page";
 import { CartPage } from "../pages/cart.page";
+import { CheckoutPage } from "../pages/checkout.page";
 
 interface Pages{
     base : BasePage
@@ -11,6 +12,7 @@ interface Pages{
     inventory : InventoryPage
     inventoryitem : InventoryItemPage
     cart : CartPage
+    checkout : CheckoutPage
 }
 
 export const pages = pagesTest.extend<Pages>({
@@ -29,4 +31,7 @@ export const pages = pagesTest.extend<Pages>({
     cart : async ({page}, use) => {
         await use (new CartPage(page))
     },
+    checkout : async({page}, use) => {
+        await use(new CheckoutPage(page))
+    }
 })
