@@ -1,4 +1,5 @@
 import { test, expect } from "../fixtures/base.fixture"; 
+import data from '../assets/data/e2e/inventory-item.data.json'
 
 
 
@@ -30,13 +31,8 @@ test.describe('Test Cases inventory saucedemo.com', () => {
     })
 
     test('Test Case 5 : Add to Cart and Then Remove from Cart', async ({inventory}) => {
-        //Arrange
-        const product = {
-            id : 4,
-            name: "Sauce Labs Onesie",
-        }
         //Act
-        await inventory.addOneProductToCart(product.id)
+        await inventory.addOneProductToCart(2)
         await expect(inventory.cartCounter).toBeVisible()
         await inventory.deleteOneProduct()
         await expect(inventory.cartCounter).not.toBeVisible()
