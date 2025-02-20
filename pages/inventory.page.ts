@@ -71,7 +71,9 @@ export class InventoryPage extends BasePage{
         return new CartPage(this.page)
     }
 
-    async addOneProductToCart(id){
-        await this.addProductToCart.nth(id).click()
+    async addOneProductToCart(product) {
+        const productContainer = this.page.locator('.inventory_item', { hasText: product });
+        const addToCartButton = productContainer.getByRole('button', { name: 'Add to cart' });
+        await addToCartButton.click();
     }
 }
