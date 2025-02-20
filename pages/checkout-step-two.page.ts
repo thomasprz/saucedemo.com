@@ -2,6 +2,7 @@ import {Page, Locator, expect} from '@playwright/test'
 import { BasePage } from './base.page';
 import { InventoryPage } from './inventory.page';
 import { CheckoutCompletePage } from './checkout-complete.page';
+import data from '../assets/data/e2e/inventory-item.data.json'
 
 export class CheckoutStepTwoPage extends BasePage{
 
@@ -32,10 +33,14 @@ export class CheckoutStepTwoPage extends BasePage{
 
     async expectProducts(products: { name: string; price: number; quantity: string }[]) {
         for (const product of products) {
-            await expect(this.productName).toHaveText(product.name);
-            await expect(this.productPrice).toHaveText(`$${product.price}`);
-            await expect(this.productQuantity).toHaveText(product.quantity);
+            await expect(this.getProductName(product.name).locator(this.productName)).toHaveText(product.name);
+            await expect(this.getProductName(product.name).locator(this.productPrice)).toHaveText(`$${product.price}`);
+            await expect(this.getProductName(product.name).locator(this.productQuantity)).toHaveText(product.quantity);
     }}
+
+    getProductName(product){
+        return this.page.getByTestId('inventory-item').filter({ hasText: product });
+    }
 
      async clickCancel(){
         await this.buttonCancel.click()
@@ -45,5 +50,11 @@ export class CheckoutStepTwoPage extends BasePage{
     async clickFinish(){
         await this.buttonFinish.click()
         return new CheckoutCompletePage(this.page)
+    }
+
+    async expectOneProduct(product) {
+            await expect(this.getProductName(product.name).locator(this.productName)).toHaveText(product.name);
+            await expect(this.getProductName(product.name).locator(this.productPrice)).toHaveText(`$${product.price}`);
+            await expect(this.getProductName(product.name).locator(this.productQuantity)).toHaveText(product.quantity);
     }
 }
