@@ -1,0 +1,28 @@
+{
+    "epic": {
+      "application": "End to end"
+    },
+
+    "feature": {
+      "authentication": "Authentication",
+      "cart": "Cart",
+      "menu": "Menu",
+      "checkout": "Checkout",
+      "footer": "Footer",
+      "inventory": "Inventory",
+      "inventoryitem" : "Inventory Item"
+    },
+
+    "parent_suite": {
+      "v001": "Version 001",
+      "v002": "Version 002"
+    },
+
+    "tags": {
+      "smoke": "@smoke",
+      "regression": "@reg",
+      "env": "@env"
+    },
+
+    "owner": { "tpr": "Thomas P" }
+  }
