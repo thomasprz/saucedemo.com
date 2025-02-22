@@ -1,7 +1,7 @@
 import {Page, Locator, expect} from '@playwright/test'
 import { BasePage } from '../pages/base.page'
 import { InventoryPage } from '../pages/inventory.page'
-import { HomePage } from '../pages/home.page'
+import { HomePage } from '../pages/login.page'
 
 export class SidebarComponent extends BasePage {
     readonly burgerButton : Locator
