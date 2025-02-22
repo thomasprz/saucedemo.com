@@ -6,3 +6,6 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 .env
+/allure-report/
+/src/output/**
+/output/**
