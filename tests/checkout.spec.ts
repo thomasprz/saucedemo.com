@@ -1,19 +1,38 @@
 import { test, expect } from "../fixtures/base.fixture";
 import { fakeCheckoutInformation } from "../factories/checkout.factory";
+import { logger } from "../helpers/logger.helper";
+// Allure Data & Tags
+import * as report from '../assets/data/report/allure.data.json' // * -> Pratique courante avec JSON permettant d'importer toutes les propriétés du fichier JSON sous un seul alias. 
+import * as allure from 'allure-js-commons'; //Importation du module allure
+import { Severity } from 'allure-js-commons'; // Criticité du test
+import { Configuration } from "../config/configuration";
 
-test.describe('Test Cases checkout saucedemo.com', async () => {
 
-    test.beforeEach(async ({home, inventory, cart, checkout}) => {
+test.describe('Checkout', {tag : [report.tags.regression]}, async () => {
+
+    test.beforeEach(async ({login, inventory, cart, checkout}) => {
         // Arrange
         const standardUser = { username: process.env.USERNAME_STANDARD, password: process.env.PASSWORD };
         //Act
-        await home.goto();
-        await home.expectHomePage();
-        await home.fillLoginForm(standardUser)
+        await login.goto();
+        await login.expectHomePage();
+        await login.fillLoginForm(Configuration.user, Configuration.password)
         await inventory.expectInventoryPage()
+        logger.info(`Running ${test.info().title}`);
+
+        await allure.parentSuite(report.parent_suite.v001); // Organise les tests dans une hiérarchie de suites. Ex : dossier v001
+        await allure.epic(report.epic.application);
+        await allure.feature(report.feature.checkout);
+        await allure.severity(Severity.CRITICAL);
+        await allure.owner(report.owner.tpr);
     })
 
-    test('Test Case 1 : Checkout', async ({checkout, inventory, cart}) => {
+    test.afterEach('Close the page', async ({ base }, testInfo) => {
+        logger.info(`Finished ${testInfo.title} with status ${testInfo.status}`);
+        await base.closePage();
+     })
+
+    test('Checkout', async ({checkout, inventory, cart}) => {
         //Arrange
         const userDataInformation = fakeCheckoutInformation()
         const product = {
@@ -30,7 +49,7 @@ test.describe('Test Cases checkout saucedemo.com', async () => {
         await checkout.stepTwo.expectCheckoutStepTwo()
     })
 
-    test('Test Case 2 : Not Checkout with Empty Form', async ({checkout, inventory, cart}) => {
+    test('Not Checkout with Empty Form', async ({checkout, inventory, cart}) => {
         //Arrange
         const userDataInformation = fakeCheckoutInformation()
         const product = {
@@ -46,7 +65,7 @@ test.describe('Test Cases checkout saucedemo.com', async () => {
         await expect(checkout.stepOne.errorMessage).toBeVisible()
         })
 
-    test('Test Case 3 : Not Checkout Without First Name', async ({checkout, inventory, cart}) => {
+    test('Not Checkout Without First Name', async ({checkout, inventory, cart}) => {
         //Arrange
         const userDataInformation = fakeCheckoutInformation();
         const product = {
@@ -64,7 +83,7 @@ test.describe('Test Cases checkout saucedemo.com', async () => {
         await expect(checkout.stepOne.errorMessage).toBeVisible()
         })
 
-    test('Test Case 4 : Not Checkout Without Last Name', async ({checkout, inventory, cart}) => {
+    test('Not Checkout Without Last Name', async ({checkout, inventory, cart}) => {
         //Arrange
         const userDataInformation = fakeCheckoutInformation();
         const product = {
@@ -82,7 +101,7 @@ test.describe('Test Cases checkout saucedemo.com', async () => {
         await expect(checkout.stepOne.errorMessage).toBeVisible()
         })
 
-    test('Test Case 5 : Not Checkout Without Zip Code', async ({checkout, inventory, cart}) => {
+    test('Not Checkout Without Zip Code', async ({checkout, inventory, cart}) => {
         //Arrange
         const userDataInformation = fakeCheckoutInformation();
         const product = {
@@ -100,7 +119,7 @@ test.describe('Test Cases checkout saucedemo.com', async () => {
         await expect(checkout.stepOne.errorMessage).toBeVisible()
         })
         
-    test('Test Case 6 : Cancel on Step One', async ({checkout, inventory, cart}) => {
+    test('Cancel on Step One', async ({checkout, inventory, cart}) => {
         //Arrange
         const userDataInformation = fakeCheckoutInformation();
         const product = {
@@ -116,7 +135,7 @@ test.describe('Test Cases checkout saucedemo.com', async () => {
         await cart.expectCartPage()
     })
 
-    test('Test Case 7 : Cancel on Step Two', async ({checkout, inventory, cart}) => {
+    test('Cancel on Step Two', async ({checkout, inventory, cart}) => {
         //Arrange 
         const userDataInformation = fakeCheckoutInformation()
         const product = {
@@ -135,7 +154,7 @@ test.describe('Test Cases checkout saucedemo.com', async () => {
         await inventory.expectInventoryPage()
     })
 
-    test('Test Case 8 : Checkout and Go Back Home', async ({checkout, inventory, cart}) => {
+    test('Checkout and Go Back Home', async ({checkout, inventory, cart}) => {
         //Arrange 
         const userDataInformation = fakeCheckoutInformation()
         const product = {
@@ -156,7 +175,7 @@ test.describe('Test Cases checkout saucedemo.com', async () => {
         await inventory.expectInventoryPage()
     })
 
-    test('Test Case 9 : Checkout 1 Article and Go Back Home', async ({checkout, inventory, cart}) => {
+    test('Checkout 1 Article and Go Back Home', async ({checkout, inventory, cart}) => {
         //Arrange 
         const userDataInformation = fakeCheckoutInformation()
         const product = {
@@ -180,7 +199,7 @@ test.describe('Test Cases checkout saucedemo.com', async () => {
         await inventory.expectInventoryPage()
     })
 
-    test('Test Case 10 : Checkout 3 Articles and Go Back Home', async ({checkout, inventory, cart}) => {
+    test('Checkout 3 Articles and Go Back Home', async ({checkout, inventory, cart}) => {
         //Arrange 
         const userDataInformation = fakeCheckoutInformation()
         const product = [
