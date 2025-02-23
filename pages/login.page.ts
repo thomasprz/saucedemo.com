@@ -11,36 +11,46 @@ export class LoginPage extends BasePage{
 
     constructor(page:Page){
         super(page)
-        this.usernameInput = page.locator('#user-name')
-        this.passwordInput = page.locator('#password')  
-        this.buttonLogin = page.locator('#login-button')
+        this.usernameInput = page.locator('#user-name');
+        this.passwordInput = page.locator('#password');
+        this.buttonLogin = page.locator('#login-button');
         this.errorLoginMessage = page.getByTestId('error')
-    }
+      }    
+
+      async fillUsername(user) {
+        await this.usernameInput.fill(user);
+      }
     
-    async expectHomePage(){
-        await expect(this.page).toHaveURL('/')
-    }
+      async fillPassword(password) {
+        await this.passwordInput.fill(password);
+      }
+     
+      async clickLogin() {
+        await this.buttonLogin.click();
+      }
     
-    async fillLoginForm(username, password){
-        await this.goto()
-        await this.usernameInput.fill(username)
-        await this.passwordInput.fill(password)
-        await this.buttonLogin.click()
-        return new InventoryPage(this.page)
-    }
-
-    async fillUsername(username){
-        await this.goto()
-        await this.usernameInput.fill(username)
-    }
-
-    async fillPassword(password){
-        await this.goto()
-        await this.passwordInput.fill(password)
-    }
-
-    async clickButtonLogin(){
-        await this.buttonLogin.click()
-        return new InventoryPage(this.page)
-    }
+      async logIn(user, password){
+        await this.goto();
+        await this.fillUsername(user);
+        await this.fillPassword(password);
+        await this.clickLogin();
+        return new InventoryPage(this.page);
+      }
+    
+      async logInWithoutCredentials() {
+        await this.goto();
+        await this.clickLogin();
+      }
+    
+      async logInWithoutUsername(password) {
+        await this.goto();
+        await this.fillPassword(password);
+        await this.clickLogin();
+      }
+    
+      async logInWithoutPassword(user) {
+        await this.goto();
+        await this.fillUsername(user);
+        await this.clickLogin();
+      }
 }
