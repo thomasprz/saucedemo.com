@@ -4,20 +4,15 @@ import { logger } from "../helpers/logger.helper";
 import * as report from '../assets/data/report/allure.data.json' // * -> Pratique courante avec JSON permettant d'importer toutes les propriétés du fichier JSON sous un seul alias. 
 import * as allure from 'allure-js-commons'; //Importation du module allure
 import { Severity } from 'allure-js-commons'; // Criticité du test
-import { Configuration } from "../config/configuration";
+import { inventoryData } from "../assets/data/e2e/inventory.data";
 
 
 test.describe('Inventory Item', {tag : [report.tags.regression]}, async () => {
 
-    test.beforeEach(async ({login, inventory}) => {
-        // Arrange
-        const standardUser = { username: process.env.USERNAME_STANDARD, password: process.env.PASSWORD };
-        // Act
-        await login.goto();
-        await login.expectHomePage();
-        await login.fillLoginForm(Configuration.user, Configuration.password)
-        await inventory.expectInventoryPage();
-        await inventory.clickOnItemName(4);
+    test.beforeEach(async ({login, inventoryitem}) => {
+
+        await login.goto(inventoryData.inventoryItemURL)
+        await inventoryitem.expectInventoryItem()
         logger.info(`Running ${test.info().title}`);
 
         await allure.parentSuite(report.parent_suite.v001); // Organise les tests dans une hiérarchie de suites. Ex : dossier v001
