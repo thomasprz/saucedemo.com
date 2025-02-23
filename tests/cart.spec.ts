@@ -5,6 +5,7 @@ import * as report from '../assets/data/report/allure.data.json' // * -> Pratiqu
 import * as allure from 'allure-js-commons'; //Importation du module allure
 import { Severity } from 'allure-js-commons'; // Criticité du test
 import { Configuration } from "../config/configuration";
+import { inventoryData } from "../assets/data/e2e/inventory.data";
 
 
 
@@ -20,9 +21,7 @@ test.describe('Cart', { tag : [report.tags.regression]}, async () => {
         ];
         
         // Act
-        await login.goto();
-        await login.expectHomePage();
-        await login.fillLoginForm(Configuration.user, Configuration.password)
+        await login.goto(inventoryData.inventoryURL);
         await inventory.addProductsToCart(products)
         await inventory.clickOnCartLink()
         await cart.expectCartPage()
