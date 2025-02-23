@@ -1,5 +1,4 @@
 export const loginData = {
-        inventoryURL: 'inventory.html',
       
         requiredUsername: 'Epic sadface: Username is required',
         requiredPassword: 'Epic sadface: Password is required',
