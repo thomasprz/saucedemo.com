@@ -6,25 +6,21 @@ import * as report from '../assets/data/report/allure.data.json' // * -> Pratiqu
 import * as allure from 'allure-js-commons'; //Importation du module allure
 import { Severity } from 'allure-js-commons'; // Criticité du test
 import { Configuration } from "../config/configuration";
+import { inventoryData } from "../assets/data/e2e/inventory.data";
 
 
 test.describe('Checkout', {tag : [report.tags.regression]}, async () => {
 
-    test.beforeEach(async ({login, inventory, cart, checkout}) => {
-        // Arrange
-        const standardUser = { username: process.env.USERNAME_STANDARD, password: process.env.PASSWORD };
-        //Act
-        await login.goto();
-        await login.expectHomePage();
-        await login.fillLoginForm(Configuration.user, Configuration.password)
-        await inventory.expectInventoryPage()
+    test.beforeEach(async ({login}) => {
         logger.info(`Running ${test.info().title}`);
-
         await allure.parentSuite(report.parent_suite.v001); // Organise les tests dans une hiérarchie de suites. Ex : dossier v001
         await allure.epic(report.epic.application);
         await allure.feature(report.feature.checkout);
         await allure.severity(Severity.CRITICAL);
         await allure.owner(report.owner.tpr);
+
+        await login.goto(inventoryData.inventoryURL)
+
     })
 
     test.afterEach('Close the page', async ({ base }, testInfo) => {
