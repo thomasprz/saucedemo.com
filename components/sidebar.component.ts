@@ -1,7 +1,7 @@
 import {Page, Locator, expect} from '@playwright/test'
 import { BasePage } from '../pages/base.page'
 import { InventoryPage } from '../pages/inventory.page'
-import { HomePage } from '../pages/login.page'
+import { HomePage, LoginPage } from '../pages/login.page'
 
 export class SidebarComponent extends BasePage {
     readonly burgerButton : Locator
@@ -34,7 +34,7 @@ export class SidebarComponent extends BasePage {
 
     async openLogout(){
         await this.logoutLink.click()
-        return new HomePage(this.page)
+        return new LoginPage(this.page)
     }
 
     async clickAppState(){
