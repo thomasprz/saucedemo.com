@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "dotenv": "^16.4.7",
     "playwright": "^1.51.0"
   },
   "devDependencies": {
