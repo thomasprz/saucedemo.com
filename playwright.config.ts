@@ -1,5 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
-
+import * as dotenv from 'dotenv';
+import * as path from 'path';
 
 export default defineConfig({
   testDir: './tests',
@@ -9,7 +10,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: process.env.BASE_URL,
+    baseURL: 'https://www.saucedemo.com',
     testIdAttribute: 'data-test',
     video : 'retain-on-failure',
     trace: 'on-first-retry',
@@ -18,18 +19,17 @@ export default defineConfig({
 
   projects: [
     {
-      name: 'chromium',
+      name: 'setup',
       use: { ...devices['Desktop Chrome'] },
+      testMatch: '**/*.setup.ts',
     },
-
-    //{
-    //  name: 'firefox',
-    //  use: { ...devices['Desktop Firefox'] },
-    //},
-
-    //{
-    //  name: 'webkit',
-    //  use: { ...devices['Desktop Safari'] },
-    //},
+    {
+      name: 'Chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: '.auth/standard_user.json',
+      },
+      dependencies: ['setup'],
+    },
   ],
 });
