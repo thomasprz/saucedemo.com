@@ -1,4 +1,5 @@
 {
+    "incorrect_user" : "Epic sadface: Username and password do not match any user in this service",
     "locked_user" : "Epic sadface: Sorry, this user has been locked out.",
     "empty_password" : "Epic sadface: Password is required",
     "empty_username" : "Epic sadface: Username is required",
