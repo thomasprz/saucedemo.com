@@ -7,8 +7,7 @@ export class BasePage {
         this.page = page
     }
 
-    async goTo(){
-        await this.page.goto('/')
-        await this.page.waitForLoadState('networkidle')
+    async goTo(url){
+        await this.page.goto(url)
     }
 }
