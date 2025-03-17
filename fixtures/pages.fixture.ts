@@ -1,14 +1,19 @@
 import {test as pagesTest} from '@playwright/test'
-import { LoginPage } from "../pages/login.page";
+import { HomePage } from "../pages/home.page";
+import { InventoryPage } from '../pages/inventory.page';
 
 interface Pages{
-    login : LoginPage
+    home : HomePage
+    inventory : InventoryPage
 }
 
 export const pages = pagesTest.extend<Pages>({
     
-    login: async ({page}, use) => {
-        await use(new LoginPage(page))
+    home: async ({page}, use) => {
+        await use(new HomePage(page))
+    },
+    inventory: async ({page}, use) => {
+        await use(new InventoryPage(page))
     },
 })
 
