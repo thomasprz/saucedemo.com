@@ -1,0 +1,6 @@
+{
+    "empty_credentials" : "Error: First Name is required",
+    "empty_firstname" : "Error: First Name is required",
+    "empty_lastname" : "Error: Last Name is required",
+    "empty_zipcode" : "Error: Postal Code is required"
+}
