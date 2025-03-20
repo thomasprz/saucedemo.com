@@ -34,7 +34,7 @@ export class CartPage extends BasePage {
     }
 
     async expectProductInCart(product){
-        const priceText = await this.locatorInventoryItemPrice.innerText(); // Extrait le texte de l'élément
+        const priceText = await this.locatorInventoryItemPrice.innerText();
         const priceFloat = parseFloat(priceText.replace('$',''))
         await expect(this.locatorInventoryItemName).toHaveText(product.name)
         await expect(priceFloat).toEqual(product.price)

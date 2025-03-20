@@ -6,7 +6,6 @@ export class InventoryItemPage extends BasePage{
     readonly locatorRemoveButton : Locator
     readonly locatorBackProducts : Locator
 
-
     constructor(page:Page){
         super(page)
         this.locatorAddToCartButton = page.getByTestId('add-to-cart')

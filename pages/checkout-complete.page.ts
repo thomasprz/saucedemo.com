@@ -13,7 +13,6 @@ export class CheckoutCompletePage extends BasePage {
         this.locatorCheckoutCompleteTitle = page.getByTestId('title')
         this.locatorSuccessMessage = page.getByTestId('complete-header')
         this.locatorBackHomeButton = page.getByTestId('back-to-products')
-        //PAGE
     }
 
     async expectCheckoutCompletePage(){

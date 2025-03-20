@@ -3,7 +3,6 @@ import { BasePage } from './base.page';
 import { InventoryItemPage } from './inventory-item.page';
 import { HeaderComponent } from '../components/header.component';
 
-
 export class InventoryPage extends BasePage {
     //LOCATOR
     readonly locatorProductsTitle : Locator
@@ -43,7 +42,7 @@ export class InventoryPage extends BasePage {
         for (const product of products) {
             const name = await product.locator('.inventory_item_name').innerText();
             const priceText = await product.locator('.inventory_item_price').innerText();
-            const price = parseFloat(priceText.replace('$', '')); // Convertir le prix en nombre
+            const price = parseFloat(priceText.replace('$', ''));
             sortedProducts.push({name,price});
         }
         return sortedProducts;

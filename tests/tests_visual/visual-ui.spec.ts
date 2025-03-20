@@ -1,6 +1,4 @@
-// Vérification des captures d'écran : visual-ui.spec.ts
-
-import { test, expect } from '../../fixtures/base.fixture';
+import { test } from '../../fixtures/base.fixture';
 import { Configuration } from '../../configuration/configuration';
 import { checkoutInformationFaker } from '../../factory/checkout.factory';
 
@@ -29,6 +27,7 @@ test.describe('Visual User', () => {
         await checkout.one.fillCheckoutForm(checkoutData);
         await checkout.two.expectScreenshot('checkoutStepTwoPage');
         await checkout.two.clickFinish();
+        //Assert
         await checkout.complete.expectScreenshot('checkoutCompleted');
         await checkout.complete.clickBackHome();
     });

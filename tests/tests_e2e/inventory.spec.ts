@@ -10,8 +10,8 @@ test.describe('Inventaire', () => {
             // Arrange
             const expectedSortedList = data.az;
             // Act
-            await inventory.sortBy('az'); // Appliquer le tri
-            const products = await inventory.sortProducts(); // Récupérer la liste triée
+            await inventory.sortBy('az');
+            const products = await inventory.sortProducts();
             // Assert
             await expect(products).toEqual(expectedSortedList);
         });
