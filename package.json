@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "@faker-js/faker": "^9.6.0",
     "dotenv": "^16.4.7",
+    "faker": "^6.6.6",
     "playwright": "^1.51.0"
   },
   "devDependencies": {
